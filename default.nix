@@ -7,18 +7,17 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
 
   # Dependencies
   # See: https://nixos.org/nixpkgs/manual/#ssec-stdenv-dependencies
-  buildInputs = [ coreutils gcc ];
+  buildInputs = [ ocaml ];
 
   # Build Phases
   # See: https://nixos.org/nixpkgs/manual/#sec-stdenv-phases
   configurePhase = ''
-    declare -xp
   '';
   buildPhase = ''
-    gcc "$src/hello.c" -o ./hello
+    ocamlc hello.ml -o hello.out
   '';
   installPhase = ''
     mkdir -p "$out/bin"
-    cp ./hello "$out/bin/"
+    cp ./hello.out "$out/bin/"
   '';
 }
